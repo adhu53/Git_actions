@@ -15,5 +15,5 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r python_programs/requirements.txt
       - name: run the python test
-        run: pytest python_programs/test/ -v
+        run: pytest python_programs/tests/ -v
   
