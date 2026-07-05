@@ -1,0 +1,12 @@
+name: Third workflow
+on: workflow_dispatch
+jobs:
+  my_job1:
+   runs-on: ubuntu-latest
+   steps:
+     - name: checkout the code
+       uses: actions/checkout@v4
+     - name: change permission of file
+       run: chmod u+x myscript.sh
+     - name: execute shell script
+       run: ./myscript.sh
