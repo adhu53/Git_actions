@@ -5,8 +5,8 @@ on:
     - main
     - 'feature/**'
   paths:
-    - './github/workflows'
- pull_requests:
+    - './github/workflows/**'
+ pull_request:
    types:
      - opened
      - closed
