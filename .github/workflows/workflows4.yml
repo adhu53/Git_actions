@@ -13,9 +13,7 @@ jobs:
       - name: install pip and requirements.txt
         run: |
           python -m pip install --upgrade pip
-          pip install -r src/requirements.txt
+          pip install -r python_programs/requirements.txt
       - name: run the python test
-        run: pytest test/ -v
+        run: pytest python_programs/test/ -v
   
-
-
