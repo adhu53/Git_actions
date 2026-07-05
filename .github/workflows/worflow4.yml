@@ -4,5 +4,5 @@ jobs:
   my_job1:
     runs-on: ubuntu-latest
     steps:
-      - name: get context
+      - name: get contexts
         run: echo "${{toJSON(github)}}"
