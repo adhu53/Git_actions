@@ -1,0 +1,8 @@
+name: Run Python test cases
+on: [push, workflow_dispatch]
+jobs:
+  my_job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: get context
+        run: echo "${{toJSON(github)}}"
