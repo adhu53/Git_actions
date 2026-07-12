@@ -30,8 +30,8 @@ jobs:
     steps:
       - name: checkout the code
         uses: actions/checkout@v3
-      - name: list file
-        run: ls
+      - name: change permission of file
+        run: chmod u+x ${{inputs.script_name}}.sh
       - name: run the script
         run: ./${{inputs.script_name}}.sh
 
