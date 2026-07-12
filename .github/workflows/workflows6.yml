@@ -1,0 +1,12 @@
+name: upload artifact
+on: workflow_dispatch
+jobs:
+  uploadArtifcat:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout the code
+        uses: actions/upload-artifact@v3
+        with:
+          name: export-files
+          path: python_programs
+
