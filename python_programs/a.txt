@@ -1,0 +1,1 @@
+script-file=./src/script.py
