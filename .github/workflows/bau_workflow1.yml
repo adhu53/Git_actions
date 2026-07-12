@@ -33,7 +33,16 @@ on:
       Ticket_no:
         description: "enter ticket number"
         required: true
-        type: string      
+        type: string
+      operation:
+        description: "enter the opertaion"
+        default: modify
+        required: true
+        type: choice
+        options:
+          - modify
+          - delete
+          - add   
 jobs:
   job1:
     runs-on: ubuntu-latest
@@ -41,7 +50,14 @@ jobs:
      - name: checkout the code
        uses: actions/checkout@v3
      - name: move to ldapbau run the modify
+       if: ${{inputs.operation}}=='modify'
        run: |
-         echo "/opt/ds/foregrock/proxy/opendj/bin/ldapmodify -h ${{inputs.server_name}} -p ${{inputs.ldap_port}} -D ${{inputs.ldap_bind_id}} -w ${{secrets.DM_PASS}} -v -c -f ldapmodify.ldif " > ${{inputs.Ticket_no}}.log
+         cd BAU/PROD/LDIFS/
+         echo "/opt/ds/foregrock/proxy/opendj/bin/ldapmodify -h ${{inputs.server_name}} -p ${{inputs.ldap_port}} -D ${{inputs.ldap_bind_id}} -w ${{secrets.DM_PASS}} -v -c -f ldapmodify.ldif" > ${{inputs.Ticket_no}}.log
+     - name: move to ldapbau run the delete
+       if: ${{inputs.operation}}=='delete'
+       run: |
+         cd BAU/PROD/LDIFS/
+         echo "/opt/ds/foregrock/proxy/opendj/bin/ldapmodify -h ${{inputs.server_name}} -p ${{inputs.ldap_port}} -D ${{inputs.ldap_bind_id}} -w ${{secrets.DM_PASS}} -v -c -f ldapdelete.ldif" > ${{inputs.Ticket_no}}.log
 
 
