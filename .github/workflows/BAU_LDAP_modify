@@ -1,0 +1,62 @@
+name: LDAP Modify
+on: 
+  workflow_dispatch:
+    inputs:
+      server_name:
+        description: "enter the ldaphost name"
+        default: loninldapb8.uk.db.com
+        required: true
+        type: choice
+        options:
+         - loninldapb8.uk.db.com
+         - loninldapp8.uk.db.com
+         - ldapdev.uk.db.com
+         - ldapdev.us.db.com
+         - ldapdev.sg.db.com
+         - ldap.us.db.com
+         - ldap.uk.db.com
+         - ldap.sg.db.com
+      ldap_port:
+        description: Enter ldap port
+        default: 1636
+        required: true
+        type: choice
+        options:
+          - 1636
+          - 2636
+          - 636
+      ldap_bind_id:
+        description: "ldap Bind Id"
+        default: cn=Directory Manager
+        required: true
+        type: string
+      Ticket_no:
+        description: "enter ticket number"
+        required: true
+        type: string
+      operation:
+        description: "enter the opertaion"
+        default: modify
+        required: true
+        type: choice
+        options:
+          - modify
+          - delete
+          - add   
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+     - name: checkout the code
+       uses: actions/checkout@v3
+     - name: move to ldapbau run the modify
+       if: ${{success() && inputs.operation=='modify'}}
+       run: |
+         cd BAU/PROD/LDIFS/
+         echo "/opt/ds/foregrock/proxy/opendj/bin/ldapmodify -h ${{inputs.server_name}} -p ${{inputs.ldap_port}} -D ${{inputs.ldap_bind_id}} -w ${{secrets.DM_PASS}} -v -c -f ldapmodify.ldif" > ${{inputs.Ticket_no}}.log
+     - name: move to ldapbau run the delete
+       if: ${{success() && inputs.operation=='delete'}}
+       run: |
+         cd BAU/PROD/LDIFS/
+         echo "/opt/ds/foregrock/proxy/opendj/bin/ldapdelete -h ${{inputs.server_name}} -p ${{inputs.ldap_port}} -D ${{inputs.ldap_bind_id}} -w ${{secrets.DM_PASS}} -v -c -f ldapdelete.ldif" > ${{inputs.Ticket_no}}.log
+
