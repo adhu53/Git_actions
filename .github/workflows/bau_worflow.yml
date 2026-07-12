@@ -10,20 +10,20 @@ on:
         options:
           - UAT
           - PROD
-       Ticket_no:
-         description: "enter ticket number"
-         required: true
-         type: string
-       script_name:
-         description: "select the script"
-         default: vanitydomain_add
-         required: true
-         type: choice
-         options:
-           - vanitydomain-add
-           - vanitydomain-del
-           - virtualdomain-add
-           - virtualdomain-del
+      Ticket_no:
+        description: "enter ticket number"
+        required: true
+        type: string
+      script_name:
+        description: "select the script"
+        default: vanitydomain_add
+        required: true
+        type: choice
+        options:
+          - vanitydomain-add
+          - vanitydomain-del
+          - virtualdomain-add
+          - virtualdomain-del
 jobs:
   job1:
     runs-on: ubuntu-latest
