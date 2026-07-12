@@ -24,6 +24,11 @@ on:
           - vanitydomain-del
           - virtualdomain-add
           - virtualdomain-del
+  push:
+   branches:
+    - main
+   paths:
+    - 'bau/vanitydomain-add.sh'
 jobs:
   job1:
     runs-on: ubuntu-latest
