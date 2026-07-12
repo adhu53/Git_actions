@@ -9,6 +9,6 @@ jobs:
         with:
           name: export-files
           path: | 
-           python_programs/src
-           python_programs/requirements.txt
+           /python_programs/src
+           /python_programs/requirements.txt
 
