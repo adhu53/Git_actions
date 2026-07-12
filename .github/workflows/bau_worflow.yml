@@ -31,7 +31,7 @@ jobs:
       - name: checkout the code
         uses: actions/checkout@v3
       - name: run the script
-        run: ./{{vanitydomain-add}}
+        run: ./{{inputs.script_name}}.sh
 
 
 
