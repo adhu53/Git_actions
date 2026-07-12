@@ -1,0 +1,44 @@
+name: BAU_Workflows
+on: 
+  workflow_dispatch:
+    inputs:
+      environment_type:
+        description: "select the environment"
+        required: true
+        default: UAT
+        type: choice
+        options:
+          - UAT
+          - PROD
+      Ticket_no:
+        description: "enter ticket number"
+        required: true
+        type: string
+      script_name:
+        description: "select the script"
+        default: vanitydomain-add
+        required: true
+        type: choice
+        options:
+          - vanitydomain-add
+          - vanitydomain-del
+          - virtualdomain-add
+          - virtualdomain-del
+jobs:
+  job1:
+    runs-on:
+     - self-hosted
+     - ${{inputs.environment_type}}
+    steps:
+      - name: checkout the code
+        uses: actions/checkout@v3
+      - name: move to BAU and change permission of file and execute
+        run: |
+          cd  BAU/
+          chmod u+x ${{inputs.script_name}}.sh
+      - name: run the script
+        run: |
+          cd BAU/
+          ./${{inputs.script_name}}.sh
+
+
