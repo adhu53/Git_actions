@@ -1,0 +1,49 @@
+name: LDAP Modify
+on: 
+  workflow_dispatch:
+    inputs:
+      server_name:
+        description: "enter the ldaphost name"
+        default: loninldapb8.uk.db.com
+        required: true
+        type: choice
+        options:
+         - loninldapb8.uk.db.com
+         - loninldapp8.uk.db.com
+         - ldapdev.uk.db.com
+         - ldapdev.us.db.com
+         - ldapdev.sg.db.com
+         - ldap.us.db.com
+         - ldap.uk.db.com
+         - ldap.sg.db.com
+      ldap_port:
+        description: Enter ldap port
+        default: 1636
+        required: true
+        type: choice
+        options:
+          - 1636
+          - 2636
+          - 636
+      ldap_bind_id:
+        description: "ldap Bind Id"
+        default: cn=Directory Manager
+        required: true
+        type: string
+      ldap_bind_pass:
+        description: "ldap Bind Password"
+        required: true
+        type: string
+      Ticket_no:
+        description: "enter ticket number"
+        required: true
+        type: string      
+jobs:
+  job1:
+    - name: checkout the code
+      uses: actions/checkout@v3
+    - name: move to ldapbau run the modify
+      run: |
+        echo "/opt/ds/foregrock/proxy/opendj/bin/ldapmodify -h ${{inputs.server_name}} -p {{inputs.ldap_port}} -D ${{inputs.ldap_bind_id}} -w ${{inputs.ldap_bind_pass}} -v -c -f ldapmodify.ldif " > {{inputs.Ticket_no}}.log
+
+
