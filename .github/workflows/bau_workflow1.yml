@@ -30,10 +30,6 @@ on:
         default: cn=Directory Manager
         required: true
         type: string
-      ldap_bind_pass:
-        description: "ldap Bind Password"
-        required: true
-        type: string
       Ticket_no:
         description: "enter ticket number"
         required: true
@@ -46,6 +42,6 @@ jobs:
        uses: actions/checkout@v3
      - name: move to ldapbau run the modify
        run: |
-         echo "/opt/ds/foregrock/proxy/opendj/bin/ldapmodify -h ${{inputs.server_name}} -p ${{inputs.ldap_port}} -D ${{inputs.ldap_bind_id}} -w ${{inputs.ldap_bind_pass}} -v -c -f ldapmodify.ldif " > {{inputs.Ticket_no}}.log
+         echo "/opt/ds/foregrock/proxy/opendj/bin/ldapmodify -h ${{inputs.server_name}} -p ${{inputs.ldap_port}} -D ${{inputs.ldap_bind_id}} -w ${{secrets.DM_PASS}} -v -c -f ldapmodify.ldif " > ${{inputs.Ticket_no}}.log
 
 
