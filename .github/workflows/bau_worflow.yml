@@ -30,6 +30,8 @@ jobs:
     steps:
       - name: checkout the code
         uses: actions/checkout@v3
+      - name: list file
+        run: ls
       - name: run the script
         run: ./{{inputs.script_name}}.sh
 
