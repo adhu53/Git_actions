@@ -1,0 +1,23 @@
+name: bau_worflows
+on:
+  push:
+   branches:
+    - main
+   paths:
+    - 'BAU/PROD/vanitydomain-add.sh'
+jobs:
+  job1:
+    runs-on: 
+     - self-hosted
+     - PROD
+    steps:
+      - name: checkout the code
+        uses: actions/checkout@v3
+      - name: move to bau and change permission of file
+        run: |
+          cd BAU/PROD/
+          chmod u+x vanitydomain-add.sh
+      - name: run the script
+        run: |
+          cd BAU/PROD/
+          ./${{inputs.script_name}}.sh
