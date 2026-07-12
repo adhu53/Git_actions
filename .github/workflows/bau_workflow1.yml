@@ -50,11 +50,11 @@ jobs:
      - name: checkout the code
        uses: actions/checkout@v3
      - name: move to ldapbau run the modify
-       if: success() && ${{inputs.operation}}=='modify'
+       if: ${{success() && ${{inputs.operation}}=='modify'}}
        run: |
          echo "/opt/ds/foregrock/proxy/opendj/bin/ldapmodify -h ${{inputs.server_name}} -p ${{inputs.ldap_port}} -D ${{inputs.ldap_bind_id}} -w ${{secrets.DM_PASS}} -v -c -f ldapmodify.ldif" > ${{inputs.Ticket_no}}.log
      - name: move to ldapbau run the delete
-       if: success() && ${{inputs.operation}}=='delete'
+       if: ${{success() && ${{inputs.operation}}=='delete'}}
        run: |
          echo "/opt/ds/foregrock/proxy/opendj/bin/ldapdelete -h ${{inputs.server_name}} -p ${{inputs.ldap_port}} -D ${{inputs.ldap_bind_id}} -w ${{secrets.DM_PASS}} -v -c -f ldapdelete.ldif" > ${{inputs.Ticket_no}}.log
 
